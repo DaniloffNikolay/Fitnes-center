@@ -15,6 +15,7 @@ public class StartFrame extends JFrame {
     private InfoPanel infoPanel;
 
     public StartFrame () {
+        setTitle("Фитнес центр");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         Toolkit kit = Toolkit.getDefaultToolkit();
         final Dimension screenSize = kit.getScreenSize(); //получили размер основного экрана
