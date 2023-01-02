@@ -1,5 +1,7 @@
 package main.navigation;
 
+import main.dataBase.DBHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class AddNewClient extends JDialog {
-
     public static final int DEFAULT_WIDTH = 640;
     public static final int DEFAULT_HEIGHT = 460;
     private JLabel labelName;
@@ -128,8 +129,9 @@ public class AddNewClient extends JDialog {
     }
 
     private void loadAllInfo() {
-        System.out.println("Name = " + fieldName.getText());
-        System.out.println("LastName = " + fieldLastName.getText());
-        System.out.println("MiddleName = " + fieldMiddleName.getText());
+        DBHandler dbHandler = new DBHandler();
+        dbHandler.addUser(fieldName.getText(), fieldLastName.getText(), fieldMiddleName.getText(), fieldBirthday.getText(),
+                fieldIIN.getText(), fieldSubscription.getText(), fieldNote.getText());
+        dbHandler.printAllUsers();
     }
 }

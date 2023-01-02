@@ -1,13 +1,14 @@
 import main.StartFrame;
+import main.dataBase.DBHandler;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Start {
     public static void main(String[] args) {
+        loadDB();
 
         if (args[0].equals("-test")) {
-            System.out.println("test");
         } else {
             EventQueue.invokeLater(new Runnable() {
                 @Override
@@ -19,5 +20,10 @@ public class Start {
                 }
             });
         }
+    }
+
+    private static void loadDB() {
+        DBHandler dbHandler = new DBHandler();
+        dbHandler.connectionDB();
     }
 }
