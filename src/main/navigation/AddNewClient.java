@@ -11,8 +11,25 @@ public class AddNewClient extends JDialog {
 
     public static final int DEFAULT_WIDTH = 640;
     public static final int DEFAULT_HEIGHT = 460;
+    private JLabel labelName;
+    private JTextField fieldName;
+    private JLabel labelLastName;
+    private JTextField fieldLastName;
+    private JLabel labelMiddleName;
+    private JTextField fieldMiddleName;
+    private JLabel labelBirthday;
+    private JTextField fieldBirthday;
+    private JLabel labelIIN;
+    private JTextField fieldIIN;
+    private JLabel labelSubscription;
+    private JTextField fieldSubscription;
+    private JLabel labelNote;
+    private JTextField fieldNote;
+
+
     public AddNewClient(Frame owner) {
         super(owner, "Добавить нового пользователя");
+        getContentPane().setBackground(new Color(0x515151));
         setResizable(false);
         owner.setEnabled(false);
         setVisible(true);
@@ -20,8 +37,7 @@ public class AddNewClient extends JDialog {
         Toolkit kit = Toolkit.getDefaultToolkit();
         final Dimension screenSize = kit.getScreenSize(); //получили размер основного экрана
         setLocation(screenSize.width / 2 - DEFAULT_WIDTH / 2, screenSize.height / 2 - DEFAULT_HEIGHT / 2);
-
-        setLayout(new GridBagLayout());
+        setLayout(null);
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -31,7 +47,19 @@ public class AddNewClient extends JDialog {
         });
 
         JButton addButton = new JButton("Добавить");
+        addButton.setBounds(380, 370, 100, 30);
+        add(addButton);
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadAllInfo();
+                owner.setEnabled(true);
+                dispose();//закрыть окно
+            }
+        });
         JButton cancelButton = new JButton("Отмена");
+        cancelButton.setBounds(500, 370, 100, 30);
+        add(cancelButton);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,30 +68,68 @@ public class AddNewClient extends JDialog {
             }
         });
 
-        JTextField textField = new JTextField("Поле", 20);
-        JLabel label = new JLabel("Имя: ");
+        JButton loadButton = new JButton("Загрузить фото");
+        loadButton.setBounds(40, 300, 181, 30);
+        add(loadButton);
 
-        GridBagConstraints gbc1 =  getNewGBC(0, 0, 1, 1);
-        add(label, gbc1);
+        String path = "C:\\Users\\Даниловы\\Downloads\\photo_5301045359566504793_y.jpg"; //99954237.png, photo_5301045359566504793_y.jpg
+        ImagePanel imagePanel = new ImagePanel(path, 196, 256);
+        imagePanel.setBounds(25, 25, 196, 256);
+        add(imagePanel);
 
-        GridBagConstraints gbc2 =  getNewGBC(1, 0, 1, 1);
-        add(textField, gbc2);
+        labelName = new JLabel("Имя: ");
+        labelName.setBounds(250, 25, 100, 30);
+        add(labelName);
+        fieldName = new JTextField("", 20);
+        fieldName.setBounds(350, 25, 250, 30);
+        add(fieldName);
 
-        GridBagConstraints gbc3 =  getNewGBC(0, 5, 1, 1);
-        add(addButton, gbc3);
+        labelLastName = new JLabel("Фамилия: ");
+        labelLastName.setBounds(250, 70, 100, 30);
+        add(labelLastName);
+        fieldLastName = new JTextField("", 20);
+        fieldLastName.setBounds(350, 70, 250, 30);
+        add(fieldLastName);
 
-        GridBagConstraints gbc4 = getNewGBC(1, 5, 1, 1);
-        add(cancelButton, gbc4);
+        labelMiddleName = new JLabel("Отчество: ");
+        labelMiddleName.setBounds(250, 115, 100, 30);
+        add(labelMiddleName);
+        fieldMiddleName = new JTextField("", 20);
+        fieldMiddleName.setBounds(350, 115, 250, 30);
+        add(fieldMiddleName);
 
-        revalidate();
+        labelBirthday = new JLabel("Дата рождения: ");
+        labelBirthday.setBounds(250, 160, 100, 30);
+        add(labelBirthday);
+        fieldBirthday = new JTextField("", 20);
+        fieldBirthday.setBounds(350, 160, 250, 30);
+        add(fieldBirthday);
+
+        labelIIN = new JLabel("ИИН: ");
+        labelIIN.setBounds(250, 205, 100, 30);
+        add(labelIIN);
+        fieldIIN = new JTextField("", 20);
+        fieldIIN.setBounds(350, 205, 250, 30);
+        add(fieldIIN);
+
+        labelSubscription = new JLabel("Абонимент: ");
+        labelSubscription.setBounds(250, 250, 100, 30);
+        add(labelSubscription);
+        fieldSubscription = new JTextField("", 20);
+        fieldSubscription.setBounds(350, 250, 250, 30);
+        add(fieldSubscription);
+
+        labelNote = new JLabel("Заметка: ");
+        labelNote.setBounds(250, 295, 100, 30);
+        add(labelNote);
+        fieldNote = new JTextField("", 20);
+        fieldNote.setBounds(350, 295, 250, 30);
+        add(fieldNote);
     }
 
-    private GridBagConstraints getNewGBC(int gridx, int gridy, int gridheight, int gridwidth) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.gridheight = gridheight;
-        gbc.gridwidth = gridwidth;
-        return gbc;
+    private void loadAllInfo() {
+        System.out.println("Name = " + fieldName.getText());
+        System.out.println("LastName = " + fieldLastName.getText());
+        System.out.println("MiddleName = " + fieldMiddleName.getText());
     }
 }
