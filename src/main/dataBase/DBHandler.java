@@ -1,16 +1,40 @@
 package main.dataBase;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBHandler {
     private Connection connection;
+    private static final DBHandler dbHandler = new DBHandler();
 
+    private DBHandler() {}
+    public static DBHandler getDBHandler() {
+        return dbHandler;
+    }
     private void getConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from users");
+            while(rs.next()) {
+                users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("lastname"),
+                        rs.getString("middlename"), rs.getString("birthday"), rs.getString("iin"),
+                        rs.getString("subscription"), rs.getString("note")));
+            }
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return users;
     }
     public void printAllUsers() {
         try {

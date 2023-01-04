@@ -23,7 +23,7 @@ public class Start {
     }
 
     private static void loadDB() {
-        DBHandler dbHandler = new DBHandler();
+        DBHandler dbHandler = DBHandler.getDBHandler();
         dbHandler.connectionDB();
     }
 }

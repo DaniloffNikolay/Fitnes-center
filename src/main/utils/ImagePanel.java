@@ -1,4 +1,4 @@
-package main.navigation;
+package main.utils;
 
 import javax.swing.*;
 import java.awt.*;

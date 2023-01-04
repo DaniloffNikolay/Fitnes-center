@@ -1,6 +1,7 @@
 package main.navigation;
 
 import main.dataBase.DBHandler;
+import main.utils.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -129,7 +130,7 @@ public class AddNewClient extends JDialog {
     }
 
     private void loadAllInfo() {
-        DBHandler dbHandler = new DBHandler();
+        DBHandler dbHandler = DBHandler.getDBHandler();
         dbHandler.addUser(fieldName.getText(), fieldLastName.getText(), fieldMiddleName.getText(), fieldBirthday.getText(),
                 fieldIIN.getText(), fieldSubscription.getText(), fieldNote.getText());
         dbHandler.printAllUsers();

@@ -1,11 +1,7 @@
 package main;
 
-import main.navigation.ImagePanel;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StartFrame extends JFrame {
     public static final int DEFAULT_WIDTH = 1366;
@@ -27,7 +23,7 @@ public class StartFrame extends JFrame {
         setJMenuBar(mainMenuBar);
 
         navigationPanel = new NavigationPanel(this);
-        tablePanel = new TablePanel(navigationPanel);
+        tablePanel = new TablePanel(navigationPanel, 400, 900);
         infoPanel = new InfoPanel(navigationPanel, tablePanel);
 
         JSplitPane splitPanHor = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tablePanel, infoPanel);
